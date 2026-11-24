@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stephan O’Brien Mortgage</title>
+<link rel="canonical" href="https://obrienmortgage.ca/">
+<script>
+// www.obrienmortgage.ca only forwards to obrienmortgage.ca, keeping the path, query and hash.
+(function () {
+  var base = 'https://obrienmortgage.ca';
+  var to = base + location.pathname + location.search + location.hash;
+  try {
+    // A browser that kept the launch-day "obrienmortgage.ca -> www" redirect would bounce straight back here.
+    // If we were here seconds ago, add a query so that remembered redirect is skipped.
+    var now = Date.now();
+    var last = Number(sessionStorage.getItem('wwwBounce')) || 0;
+    sessionStorage.setItem('wwwBounce', String(now));
+    if (now - last < 15000) {
+      to = base + location.pathname + (location.search ? location.search + '&' : '?') + 'from=www' + location.hash;
+    }
+  } catch (e) {}
+  location.replace(to);
+})();
+</script>
+<noscript><meta http-equiv="refresh" content="0; url=https://obrienmortgage.ca/"></noscript>
+</head>
+<body>
+<p>This page has moved to <a href="https://obrienmortgage.ca/">obrienmortgage.ca/</a>.</p>
+</body>
+</html>
